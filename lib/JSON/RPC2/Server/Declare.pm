@@ -47,7 +47,7 @@ __END__
 
 =head1 NAME
 
-JSON::RPC2::Server::Declare - DSL-ish syntax for JSON::RPC2::Server
+JSON::RPC2::Server::Declare - DSL-ish interface for JSON::RPC2::Server
 
 =head1 SYNOPSIS
 
@@ -75,7 +75,7 @@ JSON::RPC2::Server::Declare - DSL-ish syntax for JSON::RPC2::Server
 
 =head1 DESCRIPTION
 
-JSON::RPC2::Server::Declare presents DSL-ish syntax for building JSON-RPC 2.0 API.
+JSON::RPC2::Server::Declare presents DSL-ish interface for building JSON-RPC 2.0 API.
 
 =head1 COMMANDS
 
