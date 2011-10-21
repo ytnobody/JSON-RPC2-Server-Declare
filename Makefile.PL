@@ -2,12 +2,12 @@ use inc::Module::Install;
 name 'JSON-RPC2-Server-Declare';
 all_from 'lib/JSON/RPC2/Server/Declare.pm';
 
-# requires '';
+requires 'JSON::RPC2::Server';
 
 tests 't/*.t';
-author_tests 'xt';
 
+test_requires 'JSON';
 test_requires 'Test::More';
-auto_set_repository;
+
 auto_include;
 WriteAll;
