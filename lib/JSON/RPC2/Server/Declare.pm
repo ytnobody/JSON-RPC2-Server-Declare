@@ -28,7 +28,7 @@ sub register ($&) {
     $ROUTER->register( $method => $code );
 }
 
-sub regiter_nb ($&) {
+sub register_nb ($&) {
     my ( $method, $code ) = @_;
     $ROUTER->register_nb( $method => $code );
 }
