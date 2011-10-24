@@ -3,9 +3,12 @@ use Test::More;
 use JSON;
 
 use JSON::RPC2::Server::Declare;
+use JSON::RPC2::Client;
 
 my $response;
 my $counter = 0;
+
+my $client = JSON::RPC2::Client->new;
 
 my $server = jsonrpc {
     register rpc_sum => sub { $_[0] + $_[1] };
@@ -14,29 +17,18 @@ my $server = jsonrpc {
     build_res { $response = from_json( shift ) };
 };
 
-### this logic emulates jsonrpc-2.0 request.
-sub jsonrpc_req {
-    my ( $method, @data ) = @_;
-    return to_json( {
-        jsonrpc => '2.0',
-        id => time,
-        method => $method,
-        params => [ @data ],
-    } );
-}
-
 isa_ok $server, 'JSON::RPC2::Server';
 
-my $jsonreq = jsonrpc_req( qw/ rpc_sum 2 3 / );
-$server->execute( $jsonreq );
+my ( $req, $call ) = $client->call( 'rpc_sum', 2, 3 );
+$server->execute( $req );
 is $response->{result}, 5;
 
-$jsonreq = jsonrpc_req( qw/ rpc_double 24 / );
-$server->execute( $jsonreq );
+( $req, $call ) = $client->call( 'rpc_double', 24 );
+$server->execute( $req );
 is $response->{result}, 48;
 
-$jsonreq = jsonrpc_req( qw/ cnt / );
-$server->execute( $jsonreq );
+( $req, $call ) = $client->call( 'cnt' );
+$server->execute( $req );
 is $counter, 1;
 
 done_testing;
